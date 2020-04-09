@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="content_wrap">
+
+<form action="/view_page/list_logs/" method="get">
+    {% csrf_token %}
+    <fieldset>
+        <label> 기간 : </label>
+        <input id="fromDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="from_date" value="{{ from_date }}" formaction="/view_page/export_sales_csv/" />
+        <label> ~ </label>
+        <input id="toDate" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="to_date" value="{{ to_date }}" formaction="/view_page/export_sales_csv/" />
+        <label>검색어
+            <input type="text" name="search_keyword" value="{{ keyword }}" formaction="/view_page/export_sales_csv/" />
+        </label>
+        <button type="submit">검색</button>
+    </fieldset>
+
+</form>
+
+    <table class = "tg">
+        <colgroup>
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="35%">
+            <col width="35%">
+        </colgroup>
+
+        <tr>
+            <th class="tg-21xh"> DATE </th>
+            <th class="tg-21xh"> TIME </th>
+            <th class="tg-21xh"> USER_ID </th>
+            <th class="tg-21xh"> Q </th>
+            <th class="tg-21xh"> A </th>
+        </tr>
+
+        {%  for log in log_list %}
+        <tr>
+            <td>{{ log.log_date }}</td>
+            <td>{{ log.log_date }}</td>
+            <td>{{ log.log_time }}</td>
+            <td>{{ log.log_userid }}</td>
+            <td>{{ log.log_question }}</td>
+            <td>{{ log.log_answer }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if logs.has_previous %}
+                <a href="?page=1&search_type={{ type }}&search_keyword={{ keyword }}">&laquo; first</a>
+                <a href="?page={{ logs.previous_page_number }}&search_type={{ type }}&search_keyword={{ keyword }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ logs.number }} of {{ logs.paginator.num_pages }}.
+            </span>
+
+            {% if logs.has_next %}
+                <a href="?page={{ logs.next_page_number }}&search_type={{ type }}&search_keyword={{ keyword }}">next</a>
+                <a href="?page={{ logs.paginator.num_pages }}&search_type={{ type }}&search_keyword={{ keyword }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %}
