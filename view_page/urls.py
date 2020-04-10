@@ -23,6 +23,8 @@ urlpatterns = [
     # path('list_logs/', views.listlogs, name='list_logs'),
     # path('list_logs/(?P<dpt>[-\w]+)', views.listlogs.as_view(), name='list_logs'),
     path('list_logs/', views.listlogs.as_view(), name='list_logs'),
+    # path('<dpt>', views.listlogs.as_view(), name='list_logs'),
+    # path('list_logs/', views.listlogs.as_view(), name='list_logs'),
     # path('list_logs/', views.listlogs.as_view(), name='list_logs'),
     path('export/csv/', views.export_sales_csv, name='export_sales_csv'),
 ]
