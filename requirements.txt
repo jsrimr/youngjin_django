@@ -5,7 +5,7 @@ django-bootstrap3==12.0.3
 django-braces==1.14.0
 django-mathfilters==1.0.0
 django-widget-tweaks==1.4.8
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 mysqlclient==1.4.6
 pytz==2019.3
 simplejson==3.17.0
